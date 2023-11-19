@@ -1,5 +1,5 @@
 #include <iostream>
-#include "polinom.h"
+#include "polinom2.h"
 #include "e_s_pol.h"
 
 void entrada(polinomio &a)
