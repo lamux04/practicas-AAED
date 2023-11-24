@@ -1,4 +1,5 @@
 #include "pila-dinamica.h"
+#include "in_out_pila.h"
 #include "linea-texto.h"
 
 void Linea_texto::avanzar()
@@ -59,4 +60,10 @@ void Linea_texto::sobreescribir_caracter(char x)
     Izquierda.push(x);
     if (!Derecha.vacia())
         Derecha.pop();
+}
+
+void Linea_texto::linea()
+{
+    imprimir_pila_tope_derecha(Izquierda);
+    imprimir_pila_tope_izquierda(Derecha);
 }

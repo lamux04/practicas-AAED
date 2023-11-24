@@ -51,45 +51,53 @@ size_t Pila<T>::tama() const
 template <typename T>
 const T &Pila<T>::tope() const
 {
-  assert(n_elem > 0);
-  return (tope_->elem);
+    assert(n_elem > 0);
+    return (tope_->elem);
 }
 
 template <typename T>
 void Pila<T>::pop()
 {
-  assert(n_elem > 0);
-  nodo *p = tope_->sig;
-  delete tope_;
-  tope_ = p;
-  n_elem--;
+    assert(n_elem > 0); 
+    nodo *p = tope_;
+    tope_ = p->sig;
+    delete p;
+    n_elem--;
 }
 
 template <typename T>
 void Pila<T>::push(const T &x)
 {
-  nodo *p = tope_;
-  tope_ = new nodo;
-  tope_->elem = x;
-  tope_->sig = p;
-  n_elem++;
+    nodo *p;
+    p = tope_;
+    tope_ = new nodo;
+    tope_->elem = x;
+    tope_->sig = p;
+    n_elem++;
 }
 
 template <typename T>
 void Pila<T>::copiar(const Pila &P)
 {
-  nodo *p = P.tope_;
-  nodo *q = nullptr;
-  n_elem = P.n_elem;
-  tope_ = q;
-  while (p != nullptr)
-  {
-    q = new nodo;
-    q->elem = p->elem;
-    q->sig = nullptr;
-    q = q->sig;
-    p = p->sig;
-  }
+    if (!P.vacia()) 
+    {
+        nodo *p = P.tope_;
+        nodo *q = new nodo;
+        tope_ = q;
+        n_elem = 1;
+        q->elem = p->elem;
+        q->sig = nullptr;
+        p = p->sig;
+        while (p != nullptr)
+        {
+            n_elem++;
+            q->sig = new nodo;
+            q = q->sig;
+            q->elem = p->elem;
+            q->sig = nullptr;
+            p = p->sig;
+        }
+    }
 }
 
 template <typename T>

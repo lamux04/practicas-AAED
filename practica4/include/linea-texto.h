@@ -13,8 +13,9 @@ public:
     void borrar_caracter_anterior();
     void insertar_caracter_cursor(char x);
     void sobreescribir_caracter(char x);
+    void linea();
 
-private:
+  private:
     Pila<char> Izquierda;
     Pila<char> Derecha;
 };
