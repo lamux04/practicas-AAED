@@ -1,9 +1,9 @@
 #include <iostream>
 #include <string>
 #include "pila-dinamica.h"
-#include "ejercicio1.h"
+#include "pilas-oper.h"
 
-bool Y_inverso_X(std::string cad)
+bool Y_inverso_X(char cad[])
 {
     Pila<char> X;
     char caracter = cad[0];
