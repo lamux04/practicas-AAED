@@ -1,8 +1,10 @@
 #include <iostream>
+#include <string>
 #include "pila-dinamica.h"
 #include "in_out_pila.h"
 #include "pilas-oper.h"
 #include "linea-texto.h"
+#include "suma_ficheros.h"
 
 void prueba_pilas()
 {
@@ -56,13 +58,15 @@ void prueba_lineas_texto()
     A.linea();
 }
 
+void prueba_suma_ficheros()
+{
+    std::string a = "/home/lamux/practicas-AAED/practica4/src/f.txt";
+    suma(a);
+}
+
 int main()
 {
     using namespace std;
-    Pila<int> A;
-    leer_pila(A);
-    imprimir_pila_tope_izquierda(A);
-    invertir_secuencia(A, 1, 2);
-    imprimir_pila_tope_izquierda(A);
+    prueba_suma_ficheros();
     return 0;
 }
