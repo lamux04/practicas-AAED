@@ -1,10 +1,13 @@
 #include <iostream>
 #include <string>
+#include <algorithm>
+#include <time.h>
 #include "pila-dinamica.h"
 #include "in_out_pila.h"
 #include "pilas-oper.h"
 #include "linea-texto.h"
 #include "suma_ficheros.h"
+#include "solitario.h"
 
 void prueba_pilas()
 {
@@ -64,9 +67,46 @@ void prueba_suma_ficheros()
     suma(a);
 }
 
+void prueba_solitario()
+{
+    using namespace std;
+    int i, j, n_intento = 0;
+    tCarta baraja[40];
+    tBase base;
+    bool victoria;
+    for (i = 0; i < 4; i++)
+        for (j = 0; j < 10; j++)
+        {
+            baraja[10 * i + j].num = (num_carta) (j + 1);
+            baraja[10 * i + j].palo = (num_palo) i;
+        }
+    srand(time(nullptr));
+
+    do 
+    {
+        std::random_shuffle(baraja, baraja + 40);
+        base[0] = VACIA;
+        base[1] = VACIA;
+        base[2] = VACIA;
+        base[3] = VACIA;
+        victoria = jugar_solitario(baraja, base);
+        n_intento++;
+        cout << "Intento: " << n_intento << endl;
+        if (victoria)
+            cout << "Has ganado" << endl;
+        else
+            cout << "Has perdido" << endl;
+        cout << "OROS -> " << base[0] << endl;
+        cout << "COPAS -> " << base[1] << endl;
+        cout << "ESPADAS -> " << base[2] << endl;
+        cout << "BASTOS -> " << base[3] << endl;
+        cout << endl;
+    } while (!victoria);
+}
+
 int main()
 {
     using namespace std;
-    prueba_suma_ficheros();
+    prueba_solitario();
     return 0;
 }
