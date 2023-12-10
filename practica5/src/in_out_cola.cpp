@@ -4,6 +4,7 @@
 
 void leer_cola(Cola<int> &C) {
     using namespace std;
+    cin.clear();
     char a;
     cout << "Introduce la cola: ";
     while (cin >> a)

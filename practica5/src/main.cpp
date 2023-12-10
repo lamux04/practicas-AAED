@@ -1,6 +1,9 @@
 #include <iostream>
+#include "pila-dinamica.h"
 #include "cola-dinamica.h"
 #include "in-out-cola.h"
+#include "in_out_pila.h"
+#include "pila-cola-isomorfica.h"
 
 void prueba_colas(Cola<int> B) {
     using namespace std;
@@ -25,12 +28,26 @@ void prueba_in_out() {
     imprimir_cola(A);
 }
 
-int main() {
-    using namespace std;
-    Cola<int> A;
+void prueba_isomorfica () {
+    Pila<int> A;
     Cola<int> B;
 
-    prueba_in_out();
+    A.push(2);
+    A.push(3);
+    A.push(5);
+    A.push(3);
+    A.push(2);
+    A.push(7);
+    A.push(3);
+    B.push(3);
+    B.push(3);
 
+    std::cout << pila_cola_isomorfica(A, B);
+}
+
+int main() {
+    using namespace std;
+
+    prueba_isomorfica();
     return 0;
 }
