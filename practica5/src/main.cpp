@@ -4,6 +4,7 @@
 #include "in-out-cola.h"
 #include "in_out_pila.h"
 #include "pila-cola-isomorfica.h"
+#include "invertir_cola.h"
 
 void prueba_colas(Cola<int> B) {
     using namespace std;
@@ -45,9 +46,16 @@ void prueba_isomorfica () {
     std::cout << pila_cola_isomorfica(A, B);
 }
 
+void prueba_invertir_cola () {
+    Cola<int> A;
+    leer_cola(A);
+    invertir_cola(A, 1, 2);
+    imprimir_cola(A);
+}
+
 int main() {
     using namespace std;
 
-    prueba_isomorfica();
+    prueba_invertir_cola();
     return 0;
 }
