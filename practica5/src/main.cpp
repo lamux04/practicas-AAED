@@ -8,6 +8,7 @@
 #include "bicola.h"
 #include "pila_bicola.h"
 #include "cola_bicola.h"
+#include "aerodromo.h"
 
 void prueba_colas(Cola<int> B)
 {
@@ -126,6 +127,23 @@ void prueba_cola_bicola()
     {
         cout << A.frente();
         A.pop();
+    }
+}
+
+void prueba_aerodromo()
+{
+    Aerodromo A;
+    A.estacionar_avioneta("234ETQW");
+    A.estacionar_avioneta("345GKEE");
+    A.estacionar_avioneta("0985EWA");
+    A.estacionar_avioneta("8475FSA");
+    A.estacionar_avioneta("23DF324");
+    A.estacionar_avioneta("3242KDF");
+
+    while (!A.avionetas.vacia())
+    {
+        std::cout << A.avionetas.frente();
+        A.avionetas.pop();
     }
 }
 
