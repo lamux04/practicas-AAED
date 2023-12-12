@@ -1,7 +1,7 @@
 #ifndef AERODROMO
 #define AERODROMO
 
-typedef char avioneta[7];
+typedef char * avioneta;
 
 class Aerodromo
 {

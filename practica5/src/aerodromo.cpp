@@ -1,4 +1,5 @@
 #include <cstring>
+#include "cola-dinamica.h"
 #include "aerodromo.h"
 
 bool Aerodromo::estacionar_avioneta(avioneta a)
@@ -17,33 +18,36 @@ bool Aerodromo::estacionar_avioneta(avioneta a)
 
 void Aerodromo::sacar_avioneta(avioneta a)
 {
-    avioneta primera = avionetas.frente();
-    int iteracion = 0;
-    bool eliminacion = false;
-    while (strcmp(avionetas.frente(), a) != 0 && iteracion < avionetas.tama())
+    if (!avionetas.vacia())
     {
-        avionetas.push(avionetas.frente());
-        avionetas.pop();
-        iteracion++;
-    }
 
-    if (strcmp(avionetas.frente(), a) == 0)
-    {
-        avionetas.pop();
-        iteracion++;
-        eliminacion = true;
-    }
+        avioneta primera = avionetas.frente();
+        int iteracion = 1;
+        bool eliminacion = false;
+        while (strcmp(avionetas.frente(), a) != 0 && iteracion <= avionetas.tama())
+        {
+            avionetas.push(avionetas.frente());
+            avionetas.pop();
+            iteracion++;
+        }
 
-    while (iteracion < avionetas.tama())
-    {
-        avionetas.push(avionetas.frente());
-        avionetas.pop();
-        iteracion++;
-    }
+        if (strcmp(avionetas.frente(), a) == 0)
+        {
+            avionetas.pop();
+            eliminacion = true;
+        }
 
-    if (eliminacion)
-    {
-        avionetas.push(espera.frente());
-        espera.pop();
+        while (iteracion <= avionetas.tama())
+        {
+            avionetas.push(avionetas.frente());
+            avionetas.pop();
+            iteracion++;
+        }
+
+        if (eliminacion && !espera.vacia())
+        {
+            avionetas.push(espera.frente());
+            espera.pop();
+        }
     }
 }

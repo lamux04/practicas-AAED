@@ -133,16 +133,32 @@ void prueba_cola_bicola()
 void prueba_aerodromo()
 {
     Aerodromo A;
-    A.estacionar_avioneta("234ETQW");
-    A.estacionar_avioneta("345GKEE");
-    A.estacionar_avioneta("0985EWA");
-    A.estacionar_avioneta("8475FSA");
-    A.estacionar_avioneta("23DF324");
-    A.estacionar_avioneta("3242KDF");
+    avioneta a = "345GKEE";
+    avioneta b = "323GKFF";
+    avioneta c = "0985EWA";
+    avioneta d = "8475FSA";
+    avioneta e = "23DF324";
+    A.estacionar_avioneta(a);
+    A.estacionar_avioneta(b);
+    A.estacionar_avioneta(c);
+    A.estacionar_avioneta(d);
+    A.estacionar_avioneta(e);
+    A.estacionar_avioneta("3424daf");
+    A.estacionar_avioneta("3424baf");
+    A.estacionar_avioneta("3424caf");
+    A.estacionar_avioneta("3424waf");
+    A.estacionar_avioneta("342ytaf");
+    A.estacionar_avioneta("32d4daf");
+    A.estacionar_avioneta("3424dah");
+    A.estacionar_avioneta("3424dar");
+    A.estacionar_avioneta("3424daq");
+    A.estacionar_avioneta("3424dab");
+    A.sacar_avioneta("fkdljak");
+    A.sacar_avioneta(c);
 
     while (!A.avionetas.vacia())
     {
-        std::cout << A.avionetas.frente();
+        std::cout << A.avionetas.frente() << std::endl;
         A.avionetas.pop();
     }
 }
@@ -151,6 +167,6 @@ int main()
 {
     using namespace std;
 
-    prueba_cola_bicola();
+    prueba_aerodromo();
     return 0;
 }
