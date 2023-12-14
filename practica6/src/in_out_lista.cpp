@@ -1,5 +1,5 @@
 #include <iostream>
-#include "lista_pseudoestatica.h"
+#include "lista_dinamica.h"
 #include "in_out_lista.h"
 
 void imprimir_lista(Lista<int> A) {
