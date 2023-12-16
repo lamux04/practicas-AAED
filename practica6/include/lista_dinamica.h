@@ -2,7 +2,6 @@
 #define LISTA_DINAMICA
 #include <cassert>
 #include <cstddef>
-#include <iostream>
 
 template <typename T>
 class Lista
@@ -16,7 +15,7 @@ public:
     size_t tama() const;
     void insertar(const T &x, posicion p);
     void eliminar(posicion p);
-    const T &elemento(posicion p) const;
+    T elemento(posicion p) const;
     T &elemento(posicion p);
     posicion siguiente(posicion p) const;
     posicion anterior(posicion p) const;
@@ -83,7 +82,7 @@ void Lista<T>::eliminar(posicion p)
 }
 
 template <typename T>
-const T &Lista<T>::elemento(posicion p) const
+T Lista<T>::elemento(posicion p) const
 {
     assert(p != fin());
     return p->sig->elem;

@@ -3,4 +3,6 @@
 
 void imprimir_lista(Lista<int> A);
 
+void imprimir_lista_ordenada(ListaOrdenada<int> A);
+
 #endif
