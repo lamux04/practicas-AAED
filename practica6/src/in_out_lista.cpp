@@ -17,7 +17,7 @@ void imprimir_lista(Lista<int> A)
 {
     using namespace std;
     cout << "LISTA: ";
-    for (Lista<int>::posicion p = A.primera(); p < A.fin(); p = A.siguiente(p))
+    for (Lista<int>::posicion p = A.primera(); p != A.fin(); p = A.siguiente(p))
     {
         cout << A.elemento(p) << " ";
     }

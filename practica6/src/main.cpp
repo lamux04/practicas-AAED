@@ -1,7 +1,9 @@
 #include <iostream>
 #include "lista_dinamica.h"
 #include "lista_ordenada.h"
+#include "lista_circular.h"
 #include "in_out_lista.h"
+#include "operaciones_lista.h"
 
 // void prueba_lista(Lista<int> B)
 // {
@@ -22,8 +24,6 @@ void prueba_lista_dinamica()
 {
     Lista<int> A;
     Lista<int> B;
-
-    Lista<int>::posicion p = A.primera();  // Obtener la posición del primer elemento
 
     A.insertar(3, A.fin());
     A.insertar(4, A.fin());
@@ -51,11 +51,65 @@ void prueba_lista_ordenada()
     imprimir_lista_ordenada(A);
 }
 
+void prueba_lista_circular()
+{
+    using namespace std;
+    ListaCircular<int> A;
+    ListaCircular<int> B;
+    int i = 0;
+
+    ListaCircular<int>::posicion p;
+    p = A.inipos();
+
+    A.insertar(3, p);
+    A.insertar(4, p);
+    A.insertar(6, p);
+    A.insertar(7, p);
+    A.insertar(8, p);
+    A.insertar(9, p);
+
+    B = A;
+    A = B;
+
+    for (ListaCircular<int>::posicion q = A.inipos(), i = 0; i == 0 || q != A.inipos(); q = A.siguiente(q), i++)
+    {
+        if (A.elemento(q) == 6)
+            A.eliminar(q);
+        cout << A.elemento(q) << " ";
+    }    
+}
+
+void prueba_eliminar()
+{
+    Lista<int> A;
+    Lista<int> B;
+
+    A.insertar(7, A.fin());
+    A.insertar(3, A.fin());
+    A.insertar(7, A.fin());
+    A.insertar(4, A.fin());
+    A.insertar(7, A.fin());
+    A.insertar(6, A.fin());
+    A.insertar(7, A.fin());
+
+    A.insertar(5, A.siguiente(A.siguiente(A.anterior(A.siguiente(A.primera())))));
+
+    imprimir_lista(A);
+
+    eliminar_elemento(A, 7);
+    
+    imprimir_lista(A);
+
+    eliminar_elemento(A, 7);
+    
+    imprimir_lista(A);
+}
+
 int main()
 {
     using namespace std;
 
-    prueba_lista_ordenada();
+    prueba_eliminar();
 
     return 0;
 }

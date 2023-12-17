@@ -1,7 +1,7 @@
 #ifndef LISTA_ORDENADA
 #define LISTA_ORDENADA
 #include "lista_dinamica.h"
-#include <iostream>
+#include <cstddef>
 #include <cassert>
 
 template <typename T>
