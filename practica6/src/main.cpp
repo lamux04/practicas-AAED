@@ -76,7 +76,7 @@ void prueba_lista_circular()
         if (A.elemento(q) == 6)
             A.eliminar(q);
         cout << A.elemento(q) << " ";
-    }    
+    }
 }
 
 void prueba_eliminar()
@@ -97,19 +97,44 @@ void prueba_eliminar()
     imprimir_lista(A);
 
     eliminar_elemento(A, 7);
-    
+
     imprimir_lista(A);
 
     eliminar_elemento(A, 7);
-    
+
     imprimir_lista(A);
+}
+
+void prueba_concatenar_ordenadas()
+{
+    ListaOrdenada<int> A;
+    ListaOrdenada<int> B;
+    ListaOrdenada<int> C;
+
+    A.insertar(3);
+    A.insertar(2);
+    A.insertar(5);
+    A.insertar(4);
+    A.insertar(9);
+    B.insertar(1);
+    B.insertar(0);
+    B.insertar(-2);
+    B.insertar(7);
+    B.insertar(9);
+
+    imprimir_lista_ordenada(A);
+    imprimir_lista_ordenada(B);
+
+    C = concatenar_ordenadas(A, B);
+
+    imprimir_lista_ordenada(C);
 }
 
 int main()
 {
     using namespace std;
 
-    prueba_eliminar();
+    prueba_concatenar_ordenadas();
 
     return 0;
 }
