@@ -1,5 +1,6 @@
 #include <iostream>
-#include "lista_dinamica.h"
+// #include "lista_dinamica.h"
+#include "lista_doblemente_enlazada.h"
 #include "lista_ordenada.h"
 #include "lista_circular.h"
 #include "in_out_lista.h"
@@ -29,13 +30,16 @@ void prueba_lista_dinamica()
     A.insertar(4, A.fin());
     A.insertar(6, A.fin());
     A.insertar(7, A.fin());
+    A.insertar(5, A.anterior(A.siguiente(A.siguiente(A.siguiente(A.primera())))));
 
-    A.insertar(5, A.siguiente(A.siguiente(A.anterior(A.siguiente(A.primera())))));
+    // B = A;
+    // A = B;
 
-    for (Lista<int>::posicion q = A.primera(); q != A.fin(); q = A.siguiente(q))
-    {
-        std::cout << A.elemento(q);
-    }
+    // for (Lista<int>::posicion q = A.primera(); q != A.fin(); q = A.siguiente(q))
+    // {
+    //     std::cout << A.elemento(q);
+    // }
+    imprimir_lista(A);
 }
 
 void prueba_lista_ordenada()
@@ -56,7 +60,6 @@ void prueba_lista_circular()
     using namespace std;
     ListaCircular<int> A;
     ListaCircular<int> B;
-    int i = 0;
 
     ListaCircular<int>::posicion p;
     p = A.inipos();
@@ -134,7 +137,7 @@ int main()
 {
     using namespace std;
 
-    prueba_concatenar_ordenadas();
+    prueba_lista_dinamica();
 
     return 0;
 }

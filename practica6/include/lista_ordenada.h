@@ -1,6 +1,6 @@
 #ifndef LISTA_ORDENADA
 #define LISTA_ORDENADA
-#include "lista_dinamica.h"
+#include "lista_doblemente_enlazada.h"
 #include <cstddef>
 #include <cassert>
 

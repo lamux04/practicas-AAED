@@ -1,4 +1,5 @@
-#include "lista_dinamica.h"
+// #include "lista_dinamica.h"
+#include "lista_doblemente_enlazada.h"
 #include "lista_ordenada.h"
 
 void eliminar_elemento(Lista<int> &A, const int &x)

@@ -1,6 +1,6 @@
 #ifndef LISTA_CIRCULAR
 #define LISTA_CIRCULAR
-#include "lista_dinamica.h"
+#include "lista_doblemente_enlazada.h"
 #include <cstddef>
 #include <cassert>
 
@@ -37,7 +37,7 @@ size_t ListaCircular<T>::tama() const
 }
 
 template <typename T>
-void ListaCircular<T>::insertar(const T& x, posicion p)
+void ListaCircular<T>::insertar(const T &x, posicion p)
 {
     if (vacia())
         elementos.insertar(x, elementos.primera());
@@ -52,13 +52,13 @@ void ListaCircular<T>::eliminar(posicion p)
 }
 
 template <typename T>
-const T& ListaCircular<T>::elemento(posicion p) const
+const T &ListaCircular<T>::elemento(posicion p) const
 {
     return elementos.elemento(p);
 }
 
 template <typename T>
-T& ListaCircular<T>::elemento(posicion p)
+T &ListaCircular<T>::elemento(posicion p)
 {
     return elementos.elemento(p);
 }
