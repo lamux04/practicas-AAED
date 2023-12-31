@@ -1,10 +1,12 @@
 #include <iostream>
-// #include "lista_dinamica.h"
+#include "lista_dinamica.h"
 #include "lista_doblemente_enlazada.h"
 #include "lista_ordenada.h"
 #include "lista_circular.h"
 #include "in_out_lista.h"
 #include "operaciones_lista.h"
+#include "imprime_inverso.h"
+#include "conjunto.h"
 
 // void prueba_lista(Lista<int> B)
 // {
@@ -35,11 +37,11 @@ void prueba_lista_dinamica()
     // B = A;
     // A = B;
 
-    // for (Lista<int>::posicion q = A.primera(); q != A.fin(); q = A.siguiente(q))
-    // {
-    //     std::cout << A.elemento(q);
-    // }
-    imprimir_lista(A);
+    for (Lista<int>::posicion q = A.primera(); q != A.fin(); q = A.siguiente(q))
+    {
+        std::cout << A.elemento(q);
+    }
+    // imprimir_lista(A);
 }
 
 void prueba_lista_ordenada()
@@ -84,8 +86,8 @@ void prueba_lista_circular()
 
 void prueba_eliminar()
 {
-    Lista<int> A;
-    Lista<int> B;
+    ListaDinamica<int> A;
+    ListaDinamica<int> B;
 
     A.insertar(7, A.fin());
     A.insertar(3, A.fin());
@@ -97,15 +99,15 @@ void prueba_eliminar()
 
     A.insertar(5, A.siguiente(A.siguiente(A.anterior(A.siguiente(A.primera())))));
 
-    imprimir_lista(A);
+    // imprimir_lista(A);
 
-    eliminar_elemento(A, 7);
+    // eliminar_elemento(A, 7);
 
-    imprimir_lista(A);
+    // imprimir_lista(A);
 
-    eliminar_elemento(A, 7);
+    // eliminar_elemento(A, 7);
 
-    imprimir_lista(A);
+    // imprimir_lista(A);
 }
 
 void prueba_concatenar_ordenadas()
@@ -133,11 +135,46 @@ void prueba_concatenar_ordenadas()
     imprimir_lista_ordenada(C);
 }
 
+void prueba_imprime_inverso()
+{
+    ListaDinamica<int> A;
+    A.insertar(3, A.fin());
+    A.insertar(4, A.fin());
+    A.insertar(6, A.fin());
+    A.insertar(7, A.fin());
+    A.insertar(5, A.anterior(A.siguiente(A.siguiente(A.siguiente(A.primera())))));
+
+    imprime_inverso(A, A.siguiente(A.siguiente(A.primera())));
+}
+
+
+void prueba_conjuntos()
+{
+    Conjunto<int> A;
+    Conjunto<int> B;
+    Conjunto<int> C;
+    A.agregar(3);
+    A.agregar(5);
+    A.agregar(4);
+    A.agregar(6);
+
+    B.agregar(4);
+    B.agregar(3);
+    B.agregar(2);
+    B.agregar(7);
+
+    A.imprimir();
+    B.imprimir();
+
+    C = diferencia(A, B);
+    C.imprimir();
+}
+
 int main()
 {
     using namespace std;
 
-    prueba_lista_dinamica();
+    prueba_conjuntos();
 
     return 0;
 }

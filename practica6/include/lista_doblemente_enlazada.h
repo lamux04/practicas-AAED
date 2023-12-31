@@ -151,8 +151,19 @@ Lista<T>::~Lista()
 template <typename T>
 void Lista<T>::copiar(const Lista &P)
 {
-    for (nodo *p = P.L->sig; p != P.L; p = p->sig, ++n)
-        L->ant = L->ant->sig = new nodo(p->elem, L, L->ant);
+    nodo *p = P.L->sig;
+    L = new nodo();
+    nodo *q = L;
+    while (p != P.L)
+    {
+        q->sig = new nodo(p->elem, nullptr, q);
+        p = p->sig;
+        q = q->sig;
+    }
+    q->sig = L;
+    q->sig->ant = q;
+    n = P.n;
 }
+
 
 #endif

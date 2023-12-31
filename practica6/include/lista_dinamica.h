@@ -4,13 +4,13 @@
 #include <cstddef>
 
 template <typename T>
-class Lista
+class ListaDinamica
 {
     struct nodo;
 
 public:
     typedef nodo *posicion;
-    Lista();
+    ListaDinamica();
     bool vacia() const;
     size_t tama() const;
     void insertar(const T &x, posicion p);
@@ -21,9 +21,9 @@ public:
     posicion anterior(posicion p) const;
     posicion primera() const;
     posicion fin() const;
-    Lista(const Lista &P);
-    Lista &operator=(const Lista &P);
-    ~Lista();
+    ListaDinamica(const ListaDinamica &P);
+    ListaDinamica &operator=(const ListaDinamica &P);
+    ~ListaDinamica();
 
 private:
     struct nodo
@@ -33,12 +33,12 @@ private:
     };
     nodo *L;
     size_t n_elem;
-    void copiar(const Lista<T> &P);
+    void copiar(const ListaDinamica<T> &P);
 
 };
 
 template <typename T>
-Lista<T>::Lista()
+ListaDinamica<T>::ListaDinamica()
 {
     n_elem = 0;
     L = new nodo;
@@ -46,19 +46,19 @@ Lista<T>::Lista()
 }
 
 template <typename T>
-bool Lista<T>::vacia() const
+bool ListaDinamica<T>::vacia() const
 {
     return (n_elem == 0);
 }
 
 template <typename T>
-size_t Lista<T>::tama() const
+size_t ListaDinamica<T>::tama() const
 {
     return n_elem;
 }
 
 template <typename T>
-void Lista<T>::insertar(const T &x, posicion p)
+void ListaDinamica<T>::insertar(const T &x, posicion p)
 {
     nodo *q = p->sig;
     p->sig = new nodo;
@@ -70,7 +70,7 @@ void Lista<T>::insertar(const T &x, posicion p)
 }
 
 template <typename T>
-void Lista<T>::eliminar(posicion p)
+void ListaDinamica<T>::eliminar(posicion p)
 {
     assert(p != fin());
     nodo *q = p->sig;
@@ -82,28 +82,28 @@ void Lista<T>::eliminar(posicion p)
 }
 
 template <typename T>
-T Lista<T>::elemento(posicion p) const
+T ListaDinamica<T>::elemento(posicion p) const
 {
     assert(p != fin());
     return p->sig->elem;
 }
 
 template <typename T>
-T &Lista<T>::elemento(posicion p)
+T &ListaDinamica<T>::elemento(posicion p)
 {
     assert(p != fin());
     return p->sig->elem;
 }
 
 template <typename T>
-typename Lista<T>::posicion Lista<T>::siguiente(posicion p) const
+typename ListaDinamica<T>::posicion ListaDinamica<T>::siguiente(posicion p) const
 {
     assert(p != fin());
     return (p->sig);
 }
 
 template <typename T>
-typename Lista<T>::posicion Lista<T>::anterior(posicion p) const
+typename ListaDinamica<T>::posicion ListaDinamica<T>::anterior(posicion p) const
 {
     assert(p != primera());
     posicion q = primera();
@@ -113,19 +113,19 @@ typename Lista<T>::posicion Lista<T>::anterior(posicion p) const
 }
 
 template <typename T>
-typename Lista<T>::posicion Lista<T>::primera() const
+typename ListaDinamica<T>::posicion ListaDinamica<T>::primera() const
 {
     return L->sig;
 }
 
 template <typename T>
-typename Lista<T>::posicion Lista<T>::fin() const
+typename ListaDinamica<T>::posicion ListaDinamica<T>::fin() const
 {
     return L;
 }
 
 template <typename T>
-void Lista<T>::copiar(const Lista<T> &P)
+void ListaDinamica<T>::copiar(const ListaDinamica<T> &P)
 {
     if (!P.vacia())
     {
@@ -148,29 +148,29 @@ void Lista<T>::copiar(const Lista<T> &P)
         L->sig = inicio;
     } else
     {
-        Lista();
+        ListaDinamica();
     }
 }
 
 template <typename T>
-Lista<T>::Lista(const Lista &P)
+ListaDinamica<T>::ListaDinamica(const ListaDinamica &P)
 {
     copiar(P);
 }
 
 template <typename T>
-Lista<T> &Lista<T>::operator=(const Lista &P)
+ListaDinamica<T> &ListaDinamica<T>::operator=(const ListaDinamica &P)
 {
     if (this != &P)
     {
-        this->~Lista();
+        this->~ListaDinamica();
         copiar(P);
     }
     return *this;
 }
 
 template <typename T>
-Lista<T>::~Lista()
+ListaDinamica<T>::~ListaDinamica()
 {
     posicion p;
     posicion q = primera();
