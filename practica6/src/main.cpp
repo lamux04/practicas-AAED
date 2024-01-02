@@ -8,6 +8,9 @@
 #include "imprime_inverso.h"
 #include "conjunto.h"
 #include "lista_de_listas.h"
+#include "numero_binario.h"
+
+#include <string>
 
 // void prueba_lista(Lista<int> B)
 // {
@@ -195,11 +198,50 @@ void prueba_concatenar_listas()
     imprimir_lista(LConcat);
 }
 
+void prueba_binario()
+{
+    using namespace std;
+
+    Binario A("10010");
+    Binario C("101");
+    A.imprimir();
+
+    Binario B("");
+    B = ~A;
+
+    cout << "NOT" << endl;
+    B.imprimir();
+
+    cout << "AND" << endl;
+    B = A & C;
+    B.imprimir();
+
+    cout << "OR" << endl;
+    B = A | C;
+    B.imprimir();
+
+    cout << "XOR" << endl;
+    B = A ^ C;
+    B.imprimir();
+
+    cout << "DESPLAZAMIENTO i 2" << endl;
+    B = A << 2;
+    B.imprimir();
+    B = C << 1;
+    B.imprimir();
+
+    cout << "DESPLAZAMIENTO d 2" << endl;
+    B = A >> 2;
+    B.imprimir();
+    B = C >> 1;
+    B.imprimir();
+}
+
 int main()
 {
     using namespace std;
 
-    prueba_concatenar_listas();
+    prueba_binario();
 
     return 0;
 }
