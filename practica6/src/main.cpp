@@ -7,6 +7,7 @@
 #include "operaciones_lista.h"
 #include "imprime_inverso.h"
 #include "conjunto.h"
+#include "lista_de_listas.h"
 
 // void prueba_lista(Lista<int> B)
 // {
@@ -170,11 +171,35 @@ void prueba_conjuntos()
     C.imprimir();
 }
 
+void prueba_concatenar_listas()
+{
+    ListaDinamica<int> A;
+    A.insertar(3, A.fin());
+    A.insertar(5, A.fin());
+    A.insertar(7, A.fin());
+    A.insertar(2, A.fin());
+    A.insertar(1, A.fin());
+
+    ListaDinamica<int> B;
+    B.insertar(9, B.fin());
+    B.insertar(2, B.fin());
+    B.insertar(1, B.fin());
+    B.insertar(0, B.fin());
+    B.insertar(15, B.fin());
+
+    ListaDinamica<ListaDinamica<int>> LInic;
+    LInic.insertar(A, LInic.fin());
+    LInic.insertar(B, LInic.fin());
+
+    ListaDinamica<int> LConcat = concatenar_listas(LInic);
+    imprimir_lista(LConcat);
+}
+
 int main()
 {
     using namespace std;
 
-    prueba_conjuntos();
+    prueba_concatenar_listas();
 
     return 0;
 }

@@ -1,5 +1,5 @@
 #include <iostream>
-// #include "lista_dinamica.h"
+#include "lista_dinamica.h"
 #include "lista_doblemente_enlazada.h"
 #include "lista_ordenada.h"
 #include "in_out_lista.h"
@@ -19,6 +19,17 @@ void imprimir_lista(Lista<int> A)
     using namespace std;
     cout << "LISTA: ";
     for (Lista<int>::posicion p = A.primera(); p != A.fin(); p = A.siguiente(p))
+    {
+        cout << A.elemento(p) << " ";
+    }
+    cout << endl;
+}
+
+void imprimir_lista(ListaDinamica<int> A)
+{
+    using namespace std;
+    cout << "LISTA: ";
+    for (ListaDinamica<int>::posicion p = A.primera(); p != A.fin(); p = A.siguiente(p))
     {
         cout << A.elemento(p) << " ";
     }
