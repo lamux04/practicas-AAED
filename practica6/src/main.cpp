@@ -9,8 +9,10 @@
 #include "conjunto.h"
 #include "lista_de_listas.h"
 #include "numero_binario.h"
+#include "juego_circular.h"
 
 #include <string>
+#include <cstring>
 
 // void prueba_lista(Lista<int> B)
 // {
@@ -237,11 +239,62 @@ void prueba_binario()
     B.imprimir();
 }
 
+void prueba_juego_circular ()
+{
+    tJugadores jugadores;
+    posicion pos;
+    tJugador j1;
+    j1.nombre = "Javier";
+    j1.num = 3;
+
+    tJugador j2;
+    j2.nombre = "Antonio";
+    j2.num = 4;
+
+    tJugador j3;
+    j3.nombre = "Javi";
+    j3.num = 6;
+
+    tJugador j4;
+    j4.nombre = "Robert";
+    j4.num = 1;
+
+    tJugador j5;
+    j5.nombre = "Lucia";
+    j5.num = 3;
+
+    tJugador j6;
+    j6.nombre = "Fran";
+    j6.num = 2;
+
+    pos = jugadores.inipos();
+    jugadores.insertar(j1, pos);
+    pos = jugadores.siguiente(pos);
+    jugadores.insertar(j2, pos);
+    pos = jugadores.siguiente(pos);
+    jugadores.insertar(j3, pos);
+    pos = jugadores.siguiente(pos);
+    jugadores.insertar(j4, pos);
+    pos = jugadores.siguiente(pos);
+    jugadores.insertar(j5, pos);
+    pos = jugadores.siguiente(pos);
+    jugadores.insertar(j6, pos);
+
+    pos = jugadores.inipos();
+    for (int i = 0; i < 2; ++i)
+    {
+        pos = jugadores.siguiente(pos);
+    }
+
+    tJugador ganador = jugar_juego(jugadores, pos);
+    std::cout << "GANADOR: " << ganador.nombre;
+}
+
 int main()
 {
     using namespace std;
 
-    prueba_binario();
+    prueba_juego_circular();
 
     return 0;
 }
