@@ -153,7 +153,6 @@ void prueba_imprime_inverso()
     imprime_inverso(A, A.siguiente(A.siguiente(A.primera())));
 }
 
-
 void prueba_conjuntos()
 {
     Conjunto<int> A;
@@ -239,10 +238,10 @@ void prueba_binario()
     B.imprimir();
 }
 
-void prueba_juego_circular ()
+void prueba_juego_circular()
 {
     tJugadores jugadores;
-    posicion pos;
+    pos_jugador pos;
     tJugador j1;
     j1.nombre = "Javier";
     j1.num = 3;

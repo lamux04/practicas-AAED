@@ -3,7 +3,7 @@
 #include "lista_circular.h"
 #include "juego_circular.h"
 
-tJugador jugar_juego(tJugadores& jugadores, posicion pos)
+tJugador jugar_juego(tJugadores &jugadores, pos_jugador pos)
 {
     short int i, j;
     int cont = 0;

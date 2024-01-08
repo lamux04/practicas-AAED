@@ -1,53 +1,63 @@
-#include <cstring>
+#include <string>
+#include <iostream>
 #include "cola-dinamica.h"
 #include "aerodromo.h"
 
-bool Aerodromo::estacionar_avioneta(avioneta a)
+void Aerodromo::estacionar_avioneta(avioneta a)
 {
     if (avionetas.tama() < 12)
     {
         avionetas.push(a);
-        return false;
     }
-    else
+    else if (espera == "")
     {
-        espera.push(a);
-        return false;
+        espera = a;
     }
 }
 
 void Aerodromo::sacar_avioneta(avioneta a)
 {
+    if (a == espera)
+    {
+        espera = "";
+    }
     if (!avionetas.vacia())
     {
-
-        avioneta primera = avionetas.frente();
-        int iteracion = 1;
+        int iteracion = 1, n = avionetas.tama();
         bool eliminacion = false;
-        while (strcmp(avionetas.frente(), a) != 0 && iteracion <= avionetas.tama())
+        for (iteracion = 1; iteracion <= n; ++iteracion)
         {
-            avionetas.push(avionetas.frente());
+            if (avionetas.frente() != a)
+                avionetas.push(avionetas.frente());
+            else
+                eliminacion = true;
             avionetas.pop();
-            iteracion++;
         }
-
-        if (strcmp(avionetas.frente(), a) == 0)
+        if (eliminacion && espera != "")
         {
-            avionetas.pop();
-            eliminacion = true;
-        }
-
-        while (iteracion <= avionetas.tama())
-        {
-            avionetas.push(avionetas.frente());
-            avionetas.pop();
-            iteracion++;
-        }
-
-        if (eliminacion && !espera.vacia())
-        {
-            avionetas.push(espera.frente());
-            espera.pop();
+            avionetas.push(espera);
+            espera = "";
         }
     }
+}
+
+avioneta Aerodromo::avioneta_espera()
+{
+    return espera;
+}
+
+void Aerodromo::imprimir()
+{
+    using namespace std;
+    avioneta a;
+    cout << "AVIONETAS DEL AERODROMO: " << endl;
+    for (int i = 0; i < avionetas.tama(); ++i)
+    {
+        a = avionetas.frente();
+        cout << avionetas.frente() << endl;
+        avionetas.pop();
+        avionetas.push(a);
+    }
+    cout << endl
+         << "AVIONETA EN ESPERA: " << espera << endl;
 }

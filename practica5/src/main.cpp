@@ -132,35 +132,30 @@ void prueba_cola_bicola()
 
 void prueba_aerodromo()
 {
+    using namespace std;
     Aerodromo A;
-    avioneta a = "345GKEE";
-    avioneta b = "323GKFF";
-    avioneta c = "0985EWA";
-    avioneta d = "8475FSA";
-    avioneta e = "23DF324";
-    A.estacionar_avioneta(a);
-    A.estacionar_avioneta(b);
-    A.estacionar_avioneta(c);
-    A.estacionar_avioneta(d);
-    A.estacionar_avioneta(e);
-    A.estacionar_avioneta("3424daf");
-    A.estacionar_avioneta("3424baf");
-    A.estacionar_avioneta("3424caf");
-    A.estacionar_avioneta("3424waf");
-    A.estacionar_avioneta("342ytaf");
-    A.estacionar_avioneta("32d4daf");
-    A.estacionar_avioneta("3424dah");
-    A.estacionar_avioneta("3424dar");
-    A.estacionar_avioneta("3424daq");
-    A.estacionar_avioneta("3424dab");
-    A.sacar_avioneta("fkdljak");
-    A.sacar_avioneta(c);
-
-    while (!A.avionetas.vacia())
+    avioneta a;
+    int x;
+    do
     {
-        std::cout << A.avionetas.frente() << std::endl;
-        A.avionetas.pop();
-    }
+        cout << "Introduce un numero (1 estacionar / 2 sacar avioneta / 0 salir): ";
+        cin >> x;
+        switch (x)
+        {
+        case 1:
+            cout << "Introduce la matricula de la avioneta a estacionar: ";
+            cin >> a;
+            A.estacionar_avioneta(a);
+            break;
+        case 2:
+            cout << "Introduce la matricula de la avioneta a sacar: ";
+            cin >> a;
+            A.sacar_avioneta(a);
+            break;
+        }
+
+        A.imprimir();
+    } while (x != 0);
 }
 
 int main()
