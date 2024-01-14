@@ -84,9 +84,5 @@ void prueba_consultorio()
     A.alta("Roberto");
     A.alta("Cabeza");
     A.paciente_en_espera("Roberto", "Lucia");
-    A.paciente_en_espera("Cabeza", "Lucia");
-    A.paciente_en_espera("Roberto", "Javier");
-    A.atender_paciente("Roberto");
-    A.baja("Roberto");
     A.imprimir();
 }

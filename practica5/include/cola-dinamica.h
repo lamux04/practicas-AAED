@@ -1,62 +1,71 @@
-#ifndef COLA_DINAMICA
-#define COLA_DINAMICA
+#ifndef ColaDinamica_DINAMICA
+#define ColaDinamica_DINAMICA
 #include <cassert>
 #include <cstddef>
 
-template <typename T> class Cola {
-    public:
-        Cola();
-        bool vacia() const;
-        T frente() const;
-        size_t tama() const;
-        void push(const T &x);
-        void pop();
-        Cola(const Cola& P);
-        Cola &operator=(const Cola &P);
-        ~Cola();
+template <typename T>
+class ColaDinamica
+{
+public:
+    ColaDinamica();
+    bool vacia() const;
+    T frente() const;
+    size_t tama() const;
+    void push(const T &x);
+    void pop();
+    ColaDinamica(const ColaDinamica &P);
+    ColaDinamica &operator=(const ColaDinamica &P);
+    ~ColaDinamica();
 
-    private:
-        struct nodo {
-            T elem;
-            nodo *sig;
-        };
-        nodo *inicio;
-        nodo *fin;
-        size_t n_elem;
-        void copiar(const Cola &P);
+private:
+    struct nodo
+    {
+        T elem;
+        nodo *sig;
+    };
+    nodo *inicio;
+    nodo *fin;
+    size_t n_elem;
+    void copiar(const ColaDinamica &P);
 };
 
 template <typename T>
-Cola<T>::Cola() {
+ColaDinamica<T>::ColaDinamica()
+{
     inicio = nullptr;
     n_elem = 0;
 }
 
 template <typename T>
-bool Cola<T>::vacia() const {
+bool ColaDinamica<T>::vacia() const
+{
     return (n_elem == 0);
 }
 
 template <typename T>
-T Cola<T>::frente() const {
+T ColaDinamica<T>::frente() const
+{
     assert(!vacia());
     return (inicio->elem);
 }
 
 template <typename T>
-size_t Cola<T>::tama() const {
+size_t ColaDinamica<T>::tama() const
+{
     return (n_elem);
 }
 
 template <typename T>
-void Cola<T>::push(const T& x) {
+void ColaDinamica<T>::push(const T &x)
+{
     if (!vacia())
     {
         fin->sig = new nodo;
         fin = fin->sig;
         fin->elem = x;
         fin->sig = nullptr;
-    } else 
+    }
+    else
     {
         inicio = new nodo;
         inicio->elem = x;
@@ -67,7 +76,8 @@ void Cola<T>::push(const T& x) {
 }
 
 template <typename T>
-void Cola<T>::pop() {
+void ColaDinamica<T>::pop()
+{
     assert(!vacia());
     nodo *p = inicio;
     inicio = inicio->sig;
@@ -76,22 +86,25 @@ void Cola<T>::pop() {
 }
 
 template <typename T>
-Cola<T>::Cola(const Cola& P) {
+ColaDinamica<T>::ColaDinamica(const ColaDinamica &P)
+{
     copiar(P);
 }
 
 template <typename T>
-Cola<T>& Cola<T>::operator=(const Cola& P) {
+ColaDinamica<T> &ColaDinamica<T>::operator=(const ColaDinamica &P)
+{
     if (this != &P)
     {
-        this->~Cola();
+        this->~ColaDinamica();
         copiar(P);
     }
     return *this;
 }
 
 template <typename T>
-Cola<T>::~Cola() {
+ColaDinamica<T>::~ColaDinamica()
+{
     nodo *p;
     while (inicio != nullptr)
     {
@@ -104,7 +117,8 @@ Cola<T>::~Cola() {
 }
 
 template <typename T>
-void Cola<T>::copiar(const Cola& P) {
+void ColaDinamica<T>::copiar(const ColaDinamica &P)
+{
     if (!P.vacia())
     {
         nodo *p = P.inicio;

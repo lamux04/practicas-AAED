@@ -1,13 +1,19 @@
 #include <iostream>
-#include "pila_pseudoestatica.h"
+#include <string>
 #include "cola_dinamica.h"
+#include "cola_vectorial.h"
+#include "lista_doblmente_enlazada.h"
 #include "lista_simplemente_enlazada.h"
-#include "cubilete.h"
-#include "consultorio.h"
+#include "cocina.h"
+#include "hipermercado.h"
+#include "diccionario.h"
+#include "gestor_impresion.h"
+#include "pila_dinamica.h"
+#include "cursor.h"
 
 int main()
 {
     using namespace std;
-
-    prueba_consultorio();
+    prueba_diccionario();
+    return 0;
 }

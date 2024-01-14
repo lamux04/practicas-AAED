@@ -4,18 +4,18 @@
 #include <cassert>
 
 template <typename T>
-class Pila
+class PilaDinamica
 {
 public:
-  explicit Pila();
+  explicit PilaDinamica();
   bool vacia() const;  // Devuelve true si n_elem == 0
   size_t tama() const; // Devuelve n_elem
   const T &tope() const;
   void pop();
-  void push(const T &x);          // Agrega x a la pila
-  Pila(const Pila &P);            // Constructor de copia
-  Pila &operator=(const Pila &P); // Asignacion entre pilas
-  ~Pila();                        // Destructor
+  void push(const T &x);                          // Agrega x a la PilaDinamica
+  PilaDinamica(const PilaDinamica &P);            // Constructor de copia
+  PilaDinamica &operator=(const PilaDinamica &P); // Asignacion entre PilaDinamicas
+  ~PilaDinamica();                                // Destructor
 private:
   struct nodo
   {
@@ -26,92 +26,92 @@ private:
   nodo *tope_;
   size_t n_elem;
 
-  void copiar(const Pila &P); // Copia P a la pila implicita
+  void copiar(const PilaDinamica &P); // Copia P a la PilaDinamica implicita
 };
 
 template <typename T>
-Pila<T>::Pila()
+PilaDinamica<T>::PilaDinamica()
 {
   n_elem = 0;
   tope_ = nullptr;
 }
 
 template <typename T>
-bool Pila<T>::vacia() const
+bool PilaDinamica<T>::vacia() const
 {
   return (n_elem == 0);
 }
 
 template <typename T>
-size_t Pila<T>::tama() const
+size_t PilaDinamica<T>::tama() const
 {
   return (n_elem);
 }
 
 template <typename T>
-const T &Pila<T>::tope() const
+const T &PilaDinamica<T>::tope() const
 {
-    assert(n_elem > 0);
-    return (tope_->elem);
+  assert(n_elem > 0);
+  return (tope_->elem);
 }
 
 template <typename T>
-void Pila<T>::pop()
+void PilaDinamica<T>::pop()
 {
-    assert(n_elem > 0); 
-    nodo *p = tope_;
-    tope_ = p->sig;
-    delete p;
-    n_elem--;
+  assert(n_elem > 0);
+  nodo *p = tope_;
+  tope_ = p->sig;
+  delete p;
+  n_elem--;
 }
 
 template <typename T>
-void Pila<T>::push(const T &x)
+void PilaDinamica<T>::push(const T &x)
 {
-    nodo *p;
-    p = tope_;
-    tope_ = new nodo;
-    tope_->elem = x;
-    tope_->sig = p;
-    n_elem++;
+  nodo *p;
+  p = tope_;
+  tope_ = new nodo;
+  tope_->elem = x;
+  tope_->sig = p;
+  n_elem++;
 }
 
 template <typename T>
-void Pila<T>::copiar(const Pila &P)
+void PilaDinamica<T>::copiar(const PilaDinamica &P)
 {
-    if (!P.vacia()) 
+  if (!P.vacia())
+  {
+    nodo *p = P.tope_;
+    nodo *q = new nodo;
+    tope_ = q;
+    n_elem = 1;
+    q->elem = p->elem;
+    q->sig = nullptr;
+    p = p->sig;
+    while (p != nullptr)
     {
-        nodo *p = P.tope_;
-        nodo *q = new nodo;
-        tope_ = q;
-        n_elem = 1;
-        q->elem = p->elem;
-        q->sig = nullptr;
-        p = p->sig;
-        while (p != nullptr)
-        {
-            n_elem++;
-            q->sig = new nodo;
-            q = q->sig;
-            q->elem = p->elem;
-            q->sig = nullptr;
-            p = p->sig;
-        }
+      n_elem++;
+      q->sig = new nodo;
+      q = q->sig;
+      q->elem = p->elem;
+      q->sig = nullptr;
+      p = p->sig;
     }
+  }
 }
 
 template <typename T>
-Pila<T>::Pila(const Pila &P)
+PilaDinamica<T>::PilaDinamica(const PilaDinamica &P)
 {
   copiar(P);
 }
 
 template <typename T>
-Pila<T> &Pila<T>::operator=(const Pila &P)
+PilaDinamica<T> &PilaDinamica<T>::operator=(const PilaDinamica &P)
 {
   if (this != &P)
   {
-    this->~Pila();
+    this->~PilaDinamica();
     copiar(P);
   }
 
@@ -119,7 +119,7 @@ Pila<T> &Pila<T>::operator=(const Pila &P)
 }
 
 template <typename T>
-Pila<T>::~Pila()
+PilaDinamica<T>::~PilaDinamica()
 {
   nodo *p;
   while (tope_ != nullptr)

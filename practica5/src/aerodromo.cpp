@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include "cola-dinamica.h"
+#include "cola-pseudoestatica.h"
 #include "aerodromo.h"
 
 void Aerodromo::estacionar_avioneta(avioneta a)
@@ -9,41 +10,61 @@ void Aerodromo::estacionar_avioneta(avioneta a)
     {
         avionetas.push(a);
     }
-    else if (espera == "")
+    else
     {
-        espera = a;
+        espera.push(a);
     }
 }
 
 void Aerodromo::sacar_avioneta(avioneta a)
 {
-    if (a == espera)
-    {
-        espera = "";
-    }
+    avioneta aux;
     if (!avionetas.vacia())
     {
-        int iteracion = 1, n = avionetas.tama();
-        bool eliminacion = false;
-        for (iteracion = 1; iteracion <= n; ++iteracion)
+        aux = avionetas.frente();
+        if (aux != a)
         {
-            if (avionetas.frente() != a)
-                avionetas.push(avionetas.frente());
-            else
-                eliminacion = true;
             avionetas.pop();
+            avionetas.push(aux);
+            while (avionetas.frente() != aux && avionetas.frente() != a)
+            {
+                aux = avionetas.frente();
+                avionetas.pop();
+                avionetas.push(aux);
+            }
         }
-        if (eliminacion && espera != "")
+        if (avionetas.frente() == a)
         {
-            avionetas.push(espera);
-            espera = "";
+            avionetas.pop();
+            if (!espera.vacia())
+            {
+                avionetas.push(espera.frente());
+                espera.pop();
+            }
+        }
+        else if (!espera.vacia())
+        {
+            aux = espera.frente();
+            if (aux != a)
+            {
+                espera.pop();
+                espera.push(aux);
+                while (espera.frente() != aux && espera.frente() != a)
+                {
+                    aux = espera.frente();
+                    espera.pop();
+                    espera.push(aux);
+                }
+            }
+            if (espera.frente() == a)
+                espera.pop();
         }
     }
 }
 
 avioneta Aerodromo::avioneta_espera()
 {
-    return espera;
+    return espera.frente();
 }
 
 void Aerodromo::imprimir()
@@ -58,6 +79,13 @@ void Aerodromo::imprimir()
         avionetas.pop();
         avionetas.push(a);
     }
-    cout << endl
-         << "AVIONETA EN ESPERA: " << espera << endl;
+    if (!espera.vacia())
+        cout << "AVIONETAS EN ESPERA: " << endl;
+    for (int i = 0; i < espera.tama(); ++i)
+    {
+        a = espera.frente();
+        cout << espera.frente() << endl;
+        espera.pop();
+        espera.push(a);
+    }
 }

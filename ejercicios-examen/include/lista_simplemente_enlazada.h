@@ -1,5 +1,5 @@
-#ifndef ListaSimple_DOBLEMENTE_ENLAZADA
-#define ListaSimple_DOBLEMENTE_ENLAZADA
+#ifndef lista_simplemente_enlazada
+#define lista_simplemente_enlazada
 #include <cstddef>
 #include <cassert>
 

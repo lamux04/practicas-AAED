@@ -12,8 +12,8 @@ public:
     void imprimir();
 
 private:
-    Cola<avioneta> avionetas;
-    avioneta espera;
+    ColaVec<avioneta> avionetas(12);
+    ColaDinamica<avioneta> espera;
 };
 
 #endif
