@@ -10,10 +10,11 @@
 #include "gestor_impresion.h"
 #include "pila_dinamica.h"
 #include "cursor.h"
+#include "cartelera.h"
 
 int main()
 {
     using namespace std;
-    prueba_diccionario();
+    prueba_cartelera();
     return 0;
 }
