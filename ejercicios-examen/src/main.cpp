@@ -14,6 +14,7 @@
 #include "token_bus.h"
 #include "tres_en_raya.h"
 #include "lista_circular.h"
+#include "bicola.h"
 
 void prueba_lista(ListaCircular<int> A)
 {
@@ -29,16 +30,32 @@ void prueba_lista(ListaCircular<int> A)
     }
 }
 
+void prueba_bicola(Bicola<int> A)
+{
+    using namespace std;
+    Bicola<int> B = A;
+    A = B;
+
+    while(!A.vacia())
+    {
+        cout << A.ver_inicio() << " ";
+        A.pop_inicio();
+    }
+}
+
 int main()
 {
     using namespace std;
-    ListaCircular<int> A;
-    A.insertar(3, A.inipos());
-    A.insertar(4, A.inipos());
-    A.insertar(5, A.siguiente(A.inipos()));
-    A.insertar(6, A.siguiente(A.inipos()));
+    Bicola<int> A;
+    A.push_inicio(7);
+    A.push_inicio(6);
+    A.push_inicio(5);
+    A.push_inicio(4);
+    A.push_inicio(3);
+    A.push_fin(8);
+    A.push_fin(9);
+    A.push_fin(10);
 
-    prueba_lista(A);
-
+    prueba_bicola(A);
     return 0;
 }
