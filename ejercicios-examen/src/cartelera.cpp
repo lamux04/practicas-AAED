@@ -20,13 +20,10 @@ void Cartelera::nuevo_espectaculo(id_sala id, espectaculo espect)
     // Nos aseguramos que exista la sala
     if (pos_sala != lsalas.fin())
     {
-        sala aux_sala = lsalas.elemento(pos_sala);
-        pos_espect = buscar_espectaculo(aux_sala, espect);
-        if (pos_espect == aux_sala.lespectaculos.fin())
+        pos_espect = buscar_espectaculo(pos_sala, espect);
+        if (pos_espect == lsalas.elemento(pos_sala).lespectaculos.fin())
         {
-            aux_sala.lespectaculos.insertar(espect, aux_sala.lespectaculos.fin());
-            lsalas.eliminar(pos_sala);
-            lsalas.insertar(aux_sala, pos_sala);
+            lsalas.elemento(pos_sala).lespectaculos.insertar(espect, lsalas.elemento(pos_sala).lespectaculos.fin());
         }
     }
 }
@@ -42,16 +39,12 @@ void Cartelera::eliminar_espectaculo(id_sala id, espectaculo espect)
 {
     ListaSimple<sala>::posicion pos_sala = buscar_sala(id);
     ListaSimple<espectaculo>::posicion pos_espect;
-    sala aux_sala;
     if (pos_sala != lsalas.fin())
     {
-        aux_sala = lsalas.elemento(pos_sala);
-        pos_espect = buscar_espectaculo(aux_sala, espect);
-        if (pos_espect != aux_sala.lespectaculos.fin())
+        pos_espect = buscar_espectaculo(pos_sala, espect);
+        if (pos_espect != lsalas.elemento(pos_sala).lespectaculos.fin())
         {
-            aux_sala.lespectaculos.eliminar(pos_espect);
-            lsalas.eliminar(pos_sala);
-            lsalas.insertar(aux_sala, pos_sala);
+            lsalas.elemento(pos_sala).lespectaculos.eliminar(pos_espect);
         }
     }
 }
@@ -64,11 +57,11 @@ ListaSimple<Cartelera::sala>::posicion Cartelera::buscar_sala(id_sala id)
     return pos;
 }
 
-ListaSimple<espectaculo>::posicion Cartelera::buscar_espectaculo(const sala &sala_aux, espectaculo espect)
+ListaSimple<espectaculo>::posicion Cartelera::buscar_espectaculo(ListaSimple<sala>::posicion pos_sala, espectaculo espect)
 {
-    ListaSimple<espectaculo>::posicion pos = sala_aux.lespectaculos.primera();
-    while (pos != sala_aux.lespectaculos.fin() && sala_aux.lespectaculos.elemento(pos) != espect)
-        pos = sala_aux.lespectaculos.siguiente(pos);
+    ListaSimple<espectaculo>::posicion pos = lsalas.elemento(pos_sala).lespectaculos.primera();
+    while (pos != lsalas.elemento(pos_sala).lespectaculos.fin() && lsalas.elemento(pos_sala).lespectaculos.elemento(pos) != espect)
+        pos = lsalas.elemento(pos_sala).lespectaculos.siguiente(pos);
     return pos;
 }
 

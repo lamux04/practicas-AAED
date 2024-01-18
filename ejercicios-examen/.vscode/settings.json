@@ -67,7 +67,8 @@
     "cinttypes": "cpp",
     "typeinfo": "cpp",
     "variant": "cpp",
-    "cassert": "cpp"
+    "cassert": "cpp",
+    "valarray": "cpp"
   },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",

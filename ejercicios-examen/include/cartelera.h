@@ -21,7 +21,7 @@ private:
     };
     ListaSimple<sala> lsalas;
     ListaSimple<sala>::posicion buscar_sala(id_sala id);
-    ListaSimple<espectaculo>::posicion buscar_espectaculo(const sala &sala_aux, espectaculo espect);
+    ListaSimple<espectaculo>::posicion buscar_espectaculo(ListaSimple<sala>::posicion pos_sala, espectaculo espect);
 };
 
 void prueba_cartelera();
