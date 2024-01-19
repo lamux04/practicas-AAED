@@ -1,18 +1,38 @@
-// #ifndef GESTOR_IMPRESION
-// #define GESTOR_IMPRESION
+#ifndef GESTOR_IMPRESION
+#define GESTOR_IMPRESION
 
-// typedef std::string trabajo;
+typedef std::string cod_trabajo;
 
-// typedef std::string nombre_usuario;
+struct trabajo
+{
+    cod_trabajo cod;
+    bool urgente;
+    trabajo(cod_trabajo c = "", bool u = false) : cod(c), urgente(u) {}
+};
 
-// class Gestor_impresion
-// {
-// public:
-//     Gestor_impresion(unsigned n);                                        // Pre: n > 0. Post: Crea un gestor de impresion para n usuarios.
-//     void nuevo_trabajo(trabajo trab, bool urgente, nombre_usuario user); // Post: Si user exite, le añade trab. Sino, crea user y le añade trab.
-//     void eliminar_trabajo();                                             // Post: Elimina el trabajo que le tocaba imprimirse (si es necesario elimina al usuario tambien) y avanza el turno al siguiente usuario.
-//     void cancelar_trabajos(nombre_usuario user);                         // Post: Si exite user, lo elimina.
-// private:
-// };
+class GestorImpresion
+{
+public:
+    GestorImpresion(size_t n);                                       
+    void nuevo_trabajo(int id, trabajo tra); 
+    void eliminar_trabajo();
+    void cancelar_trabajos(int id);
+    GestorImpresion(const GestorImpresion &P);
+    GestorImpresion &operator=(const GestorImpresion &P);
+    ~GestorImpresion();
+    void imprimir();
 
-// #endif
+private:
+    struct usuario
+    {
+        ColaDinamica<cod_trabajo> c_no_urgente;
+        ColaDinamica<cod_trabajo> c_urgente;
+    };
+    usuario *v_usuarios;
+    size_t n;
+    ColaVec<int> turnos;
+};
+
+void prueba_gestor_impresion();
+
+#endif

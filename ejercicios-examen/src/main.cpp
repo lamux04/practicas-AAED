@@ -46,16 +46,6 @@ void prueba_bicola(Bicola<int> A)
 int main()
 {
     using namespace std;
-    Bicola<int> A;
-    A.push_inicio(7);
-    A.push_inicio(6);
-    A.push_inicio(5);
-    A.push_inicio(4);
-    A.push_inicio(3);
-    A.push_fin(8);
-    A.push_fin(9);
-    A.push_fin(10);
-
-    prueba_bicola(A);
+    prueba_gestor_impresion();
     return 0;
 }
