@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 #include "cola_dinamica.h"
 #include "cola_vectorial.h"
 #include "lista_doblmente_enlazada.h"

@@ -17,9 +17,9 @@ public:
     void nuevo_trabajo(int id, trabajo tra); 
     void eliminar_trabajo();
     void cancelar_trabajos(int id);
-    GestorImpresion(const GestorImpresion &P);
-    GestorImpresion &operator=(const GestorImpresion &P);
-    ~GestorImpresion();
+    // GestorImpresion(const GestorImpresion &P);
+    // GestorImpresion &operator=(const GestorImpresion &P);
+    // ~GestorImpresion();
     void imprimir();
 
 private:
@@ -28,7 +28,7 @@ private:
         ColaDinamica<cod_trabajo> c_no_urgente;
         ColaDinamica<cod_trabajo> c_urgente;
     };
-    usuario *v_usuarios;
+    std::vector<usuario> v_usuarios;
     size_t n;
     ColaVec<int> turnos;
 };

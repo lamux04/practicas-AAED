@@ -107,6 +107,5 @@ void prueba_solitario()
 int main()
 {
     using namespace std;
-    prueba_solitario();
     return 0;
 }

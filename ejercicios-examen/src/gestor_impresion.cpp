@@ -2,11 +2,12 @@
 #include <stddef.h>
 #include <cassert>
 #include <iostream>
+#include <vector>
 #include "cola_dinamica.h"
 #include "cola_vectorial.h"
 #include "gestor_impresion.h"
 
-GestorImpresion::GestorImpresion(size_t elem) : turnos(n), n(elem), v_usuarios(new usuario[elem]) {}
+GestorImpresion::GestorImpresion(size_t elem) : turnos(n), n(elem), v_usuarios(elem) {}
 
 void GestorImpresion::nuevo_trabajo(int id, trabajo tra)
 {
@@ -65,35 +66,35 @@ void GestorImpresion::cancelar_trabajos(int id)
     }
 }
 
-GestorImpresion::GestorImpresion(const GestorImpresion &P) : turnos(P.turnos)
-{
-    v_usuarios = new usuario[P.n];
-    n = P.n;
-    for (int i = 0; i < n; ++i)
-        v_usuarios[i] = P.v_usuarios[i];
-}
+// GestorImpresion::GestorImpresion(const GestorImpresion &P) : turnos(P.turnos)
+// {
+//     v_usuarios = new usuario[P.n];
+//     n = P.n;
+//     for (int i = 0; i < n; ++i)
+//         v_usuarios[i] = P.v_usuarios[i];
+// }
 
-GestorImpresion& GestorImpresion::operator=(const GestorImpresion& P)
-{
-    int i;
-    if (this != &P)
-    {
-        delete[] v_usuarios;
-        v_usuarios = new usuario[P.n];
-        n = P.n;
-        for (i = 0; i < n; ++i)
-            v_usuarios[i] = P.v_usuarios[i];
-        turnos = P.turnos;
-    }
+// GestorImpresion& GestorImpresion::operator=(const GestorImpresion& P)
+// {
+//     int i;
+//     if (this != &P)
+//     {
+//         delete[] v_usuarios;
+//         v_usuarios = new usuario[P.n];
+//         n = P.n;
+//         for (i = 0; i < n; ++i)
+//             v_usuarios[i] = P.v_usuarios[i];
+//         turnos = P.turnos;
+//     }
 
-    return *this;
-}
+//     return *this;
+// }
 
-GestorImpresion::~GestorImpresion()
-{
-    delete[] v_usuarios;
-    n = 0;
-}
+// GestorImpresion::~GestorImpresion()
+// {
+//     delete[] v_usuarios;
+//     n = 0;
+// }
 
 void GestorImpresion::imprimir()
 {
@@ -145,6 +146,7 @@ void GestorImpresion::imprimir()
             turnos.push(j);
         } while (k != turnos.frente());
     }
+
 }
 
 void prueba_gestor_impresion()
