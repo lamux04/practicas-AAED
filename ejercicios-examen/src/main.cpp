@@ -16,6 +16,10 @@
 #include "tres_en_raya.h"
 #include "lista_circular.h"
 #include "bicola.h"
+#include "postfijo.h"
+#include "escalonada.h"
+#include "hospital.h"
+#include "texto.h"
 
 void prueba_lista(ListaCircular<int> A)
 {
@@ -47,6 +51,6 @@ void prueba_bicola(Bicola<int> A)
 int main()
 {
     using namespace std;
-    prueba_gestor_impresion();
+    prueba_cocina();
     return 0;
 }

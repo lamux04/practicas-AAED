@@ -1,104 +1,123 @@
 #include <cassert>
 #include <iostream>
-#include "lista_doblmente_enlazada.h"
+#include "lista_simplemente_enlazada.h"
 #include "cocina.h"
 
 void prueba_cocina()
 {
     using namespace std;
     Cocina A(50);
-    Cocina::tmueble mueble(10, 5);
-    A.colocar_mueble(mueble);
-    Cocina::tmueble muebleb(10, 20);
-    A.colocar_mueble(muebleb);
-    Cocina::tmueble mueblec(5, 15);
-    A.colocar_mueble(mueblec);
-    cout << A.ver_mueble(2).pos << " " << A.ver_mueble(2).anchura;
+    A.nuevo_mueble(tmueble(2, 10));
+    A.nuevo_mueble(tmueble(12, 4));
+    A.nuevo_mueble(tmueble(20, 4));
+    A.nuevo_mueble(tmueble(25, 4));
+    A.mover_mueble(3);
+    A.eliminar_mueble(1);
+    A.imprimir();
 }
 
-Cocina::Cocina(double len) : longitud(len) {}
+Cocina::Cocina(double tama) : tam_max(tama) {}
 
-bool Cocina::comprobar_mueble(tmueble mueble)
+bool Cocina::puede_colocarse(tmueble mueble)
 {
-    bool colocar = false;
-    Lista<tmueble>::posicion pos = obtener_posicion(mueble);
-
-    if (pos != muebles.fin()) // No queremos añadir el mueble al final
-    {
-        tmueble aux = muebles.elemento(pos);
-        colocar = aux.pos >= mueble.anchura + mueble.pos;
-    }
-    else // Queremos añadir el mueble al final
-    {
-        colocar = longitud >= mueble.anchura + mueble.pos;
-    }
-
-    return colocar;
-}
-
-void Cocina::colocar_mueble(tmueble mueble)
-{
-    Lista<tmueble>::posicion pos = obtener_posicion(mueble);
-    assert(comprobar_mueble(mueble));
-    muebles.insertar(mueble, pos);
-}
-
-Lista<Cocina::tmueble>::posicion Cocina::obtener_posicion(tmueble mueble)
-{
-    Lista<tmueble>::posicion pos = muebles.primera();
-    tmueble aux;
-    if (pos != muebles.fin())
-        aux = muebles.elemento(pos);
-
-    // Obtenemos el mueble que está justo antes de donde intentariamos colocar el mueble
-    while (pos != muebles.fin() && aux.pos < mueble.pos)
-    {
-        pos = muebles.siguiente(pos);
-        if (pos != muebles.fin())
-            aux = muebles.elemento(pos);
-    }
-
-    return pos;
-}
-
-Cocina::tmueble Cocina::ver_mueble(unsigned i)
-{
-    Lista<tmueble>::posicion pos = buscar(i);
-    tmueble mueble;
-    if (pos != muebles.fin())
-        return muebles.elemento(pos);
-    else
-        return mueble;
-}
-
-void Cocina::eliminar_mueble(unsigned i)
-{
-    Lista<tmueble>::posicion pos = buscar(i);
-    if (pos != muebles.fin())
-        muebles.elemento(pos);
-}
-
-void Cocina::mover_mueble(unsigned i)
-{
-    Lista<tmueble>::posicion pos = buscar(i);
-    if (pos != muebles.fin())
-    {
-        if (pos == muebles.primera())
-            muebles.elemento(pos).pos = 0;
+    ListaSimple<tmueble>::posicion pos = buscar_hueco(mueble.posicion);
+    if (pos == nullptr)
+    {   
+        if (lmuebles.vacia() && mueble.posicion + mueble.anchura <= tam_max)
+            return true;
         else
-        {
-            tmueble mueble_anterior = muebles.elemento(muebles.anterior(pos));
-            muebles.elemento(pos).pos = mueble_anterior.pos + mueble_anterior.anchura;
-        }
+            return false;
+        if (lmuebles.elemento(lmuebles.primera()).posicion >= mueble.posicion + mueble.anchura)
+            return true;
+        else
+            return false;
+    }
+    if (pos == lmuebles.fin())
+        return false;
+    if (lmuebles.siguiente(pos) == lmuebles.fin())
+    {
+        if (lmuebles.elemento(pos).anchura + lmuebles.elemento(pos).posicion <= mueble.posicion && mueble.posicion <= tam_max)
+            return true;
+        else
+            return false;
+    }
+    if (lmuebles.elemento(lmuebles.siguiente(pos)).posicion >= mueble.posicion + mueble.anchura && lmuebles.elemento(pos).anchura + lmuebles.elemento(pos).posicion <= mueble.posicion)
+        return true;
+    else
+        return false;
+}
+
+void Cocina::nuevo_mueble(tmueble mueble)
+{
+    assert(puede_colocarse(mueble));
+    ListaSimple<tmueble>::posicion pos = buscar_hueco(mueble.posicion);
+    if (pos == nullptr)
+        lmuebles.insertar(mueble, lmuebles.primera());
+    else
+        lmuebles.insertar(mueble, lmuebles.siguiente(pos));
+}
+
+ListaSimple<tmueble>::posicion Cocina::buscar_hueco(double pos)
+{
+    ListaSimple<tmueble>::posicion pos_mueble = lmuebles.primera();
+    if (!lmuebles.vacia())
+    {
+        if (lmuebles.elemento(lmuebles.primera()).posicion > pos)
+            return nullptr;
+        while (lmuebles.siguiente(pos_mueble) != lmuebles.fin() && lmuebles.elemento(lmuebles.siguiente(pos_mueble)).posicion <= pos)
+            pos_mueble = lmuebles.siguiente(pos_mueble);
+        if (pos > tam_max)
+            return lmuebles.fin();
+    }
+    else
+    {
+        if (pos < tam_max)
+            pos_mueble = nullptr;
+        else
+            pos_mueble = lmuebles.fin();
+    }
+    return pos_mueble;
+}
+
+tmueble Cocina::mueble_iesimo(size_t i)
+{
+    assert(i > 0 && i <= lmuebles.tama());
+    ListaSimple<tmueble>::posicion pos = buscar_iesimo(i);
+    return lmuebles.elemento(pos);
+}
+
+void Cocina::eliminar_mueble(size_t i)
+{
+    ListaSimple<tmueble>::posicion pos = buscar_iesimo(i);
+    if (pos != lmuebles.fin())
+        lmuebles.eliminar(pos);
+}
+
+void Cocina::mover_mueble(size_t i)
+{
+    ListaSimple<tmueble>::posicion pos;
+    if (i == 1 && lmuebles.tama() >= 1)
+        lmuebles.elemento(lmuebles.primera()).posicion = 0;
+    else
+    {
+        pos = buscar_iesimo(i - 1);
+        if (lmuebles.tama() >= i)
+            lmuebles.elemento(lmuebles.siguiente(pos)).posicion = lmuebles.elemento(pos).posicion + lmuebles.elemento(pos).anchura;
     }
 }
 
-Lista<Cocina::tmueble>::posicion Cocina::buscar(unsigned i)
+ListaSimple<tmueble>::posicion Cocina::buscar_iesimo(size_t i)
 {
-    int j = 1;
-    Lista<tmueble>::posicion pos;
-    for (pos = muebles.primera(); j < i && pos != muebles.fin(); pos = muebles.siguiente(pos), ++j)
-    {
-    }
+    ListaSimple<tmueble>::posicion pos;
+    for (pos = lmuebles.primera(); pos != lmuebles.fin() && i > 1; pos = lmuebles.siguiente(pos))
+        --i;
     return pos;
+}
+
+void Cocina::imprimir()
+{
+    using namespace std;
+    ListaSimple<tmueble>::posicion pos;
+    for (pos = lmuebles.primera(); pos != lmuebles.fin(); pos = lmuebles.siguiente(pos))
+        cout << "   - " << lmuebles.elemento(pos).posicion << " / " << lmuebles.elemento(pos).anchura + lmuebles.elemento(pos).posicion << endl;
 }

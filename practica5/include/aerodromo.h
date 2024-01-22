@@ -12,7 +12,7 @@ public:
     void imprimir();
 
 private:
-    ColaVec<avioneta> avionetas(12);
+    ColaVec<avioneta> avionetas{12};
     ColaDinamica<avioneta> espera;
 };
 
